@@ -1,0 +1,11 @@
+{
+  "name": "nikis05-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "NONE",
+  "private": true,
+  "author": "Kit Isaev",
+  "dependencies": {
+    "typescript": "^5.4.5"
+  }
+}
