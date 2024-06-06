@@ -2,8 +2,14 @@ import 'package:frontend/routes/shell/lock_screen.dart';
 import 'package:frontend/widgets.dart';
 
 class Curtain extends StatefulWidget {
-  const Curtain({super.key, required this.child});
+  const Curtain(
+      {super.key,
+      required this.renderTitle,
+      required this.fillBackground,
+      required this.child});
 
+  final bool renderTitle;
+  final bool fillBackground;
   final Widget child;
 
   @override
@@ -87,6 +93,8 @@ class _State extends State<Curtain> with SingleTickerProviderStateMixin {
                         .animate(_controller),
                     child: LockScreen(
                       onOpen: _open,
+                      renderTitle: widget.renderTitle,
+                      fillBackground: widget.fillBackground,
                     )),
               ],
             ));

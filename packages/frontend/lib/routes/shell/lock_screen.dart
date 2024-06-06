@@ -1,69 +1,32 @@
-import 'package:frontend/widgets.dart';
-import 'package:intl/intl.dart';
+import 'package:frontend/routes/shell/clock.dart';
+import './title.dart';
+import 'package:frontend/widgets.dart' hide Title;
 
-class LockScreen extends StatefulWidget {
-  const LockScreen({super.key, required this.onOpen});
+class LockScreen extends StatelessWidget {
+  const LockScreen(
+      {super.key,
+      required this.onOpen,
+      required this.renderTitle,
+      required this.fillBackground});
 
   final VoidCallback onOpen;
-
-  @override
-  State<StatefulWidget> createState() => _State();
-}
-
-class _State extends State<LockScreen> {
-  _State()
-      : this._fromDateStream(Stream.periodic(const Duration(milliseconds: 100))
-            .map((_) => DateTime.now())
-            .asBroadcastStream());
-
-  _State._fromDateStream(Stream<DateTime> dateStream)
-      : dayStream = dateStream.map(formatDay).distinct(),
-        timeStream = dateStream.map(formatTime).distinct();
-
-  late final Stream<String> dayStream;
-  late final Stream<String> timeStream;
-
-  static String formatDay(DateTime date) =>
-      DateFormat("EEEE, MMMM d").format(date);
-
-  static String formatTime(DateTime date) => DateFormat("HH:mm").format(date);
+  final bool renderTitle;
+  final bool fillBackground;
 
   @override
   Widget build(BuildContext context) => Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.fitHeight,
-              image: AssetImage("images/background_locked.png"))),
+              fit: fillBackground ? BoxFit.cover : BoxFit.fitHeight,
+              image: const AssetImage("images/background_locked.png"))),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 32),
-            child: Column(
-              children: [
-                StreamBuilder(
-                    initialData: formatDay(DateTime.now()),
-                    stream: dayStream,
-                    builder: (_, daySnapshot) {
-                      final day = daySnapshot.data!;
-                      return Text(day);
-                    }),
-                StreamBuilder(
-                  initialData: formatTime(DateTime.now()),
-                  stream: timeStream,
-                  builder: (_, timeSnapshot) {
-                    final time = timeSnapshot.data!;
-                    return Text(
-                      time,
-                      style: Fonts.h1,
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
+              padding: const EdgeInsets.only(top: 32),
+              child: renderTitle ? const Title() : const Clock()),
           AbstractButton(
-              onPress: widget.onOpen,
+              onPress: onOpen,
               build: (_, bright) => Container(
                     padding:
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
