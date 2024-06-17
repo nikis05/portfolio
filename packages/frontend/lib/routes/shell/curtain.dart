@@ -25,7 +25,7 @@ class _State extends State<Curtain> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this);
+    _controller = AnimationController(value: 1, vsync: this);
   }
 
   @override

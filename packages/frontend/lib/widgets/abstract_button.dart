@@ -85,10 +85,12 @@ class _State extends State<AbstractButton> {
           cursor: SystemMouseCursors.click,
           onEnter: _handleMouseEnter,
           onExit: _handleMouseExit,
-          child: GestureDetector(
-              onTapDown: _handleTapDown,
-              onTapUp: _handleTapUp,
-              onTapCancel: _handleTapCancel,
-              onTap: widget.onPress,
-              child: widget.build(context, _bright))));
+          child: TapRegion(
+              onTapOutside: (_) => _focusNode.unfocus(),
+              child: GestureDetector(
+                  onTapDown: _handleTapDown,
+                  onTapUp: _handleTapUp,
+                  onTapCancel: _handleTapCancel,
+                  onTap: widget.onPress,
+                  child: widget.build(context, _bright)))));
 }

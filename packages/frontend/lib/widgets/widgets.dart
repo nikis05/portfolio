@@ -1,3 +1,11 @@
 export 'package:flutter/widgets.dart';
 export 'package:flutter_svg/flutter_svg.dart';
+export 'package:go_router/go_router.dart';
+export 'package:provider/provider.dart';
 export './abstract_button.dart';
+export './app_route/app_route.dart';
+export './is_portfolio_open.dart';
+export './pane.dart';
+export './with_alignment.dart';
+export './inline_button.dart';
+export './contact_me_section.dart';

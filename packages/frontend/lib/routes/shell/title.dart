@@ -9,6 +9,6 @@ class Title extends StatelessWidget {
           "Kit Isaev",
           style: Fonts.h2,
         ),
-        Text("senior software developer"),
+        Text("senior software engineer & consultant"),
       ]);
 }

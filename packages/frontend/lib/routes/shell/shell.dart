@@ -1,5 +1,4 @@
 import 'package:frontend/routes/shell/curtain.dart';
-import 'package:frontend/routes/shell/lock_screen.dart';
 import 'package:frontend/widgets.dart' hide Title;
 import './title.dart';
 
@@ -18,7 +17,12 @@ class Shell extends StatelessWidget {
     final curtain = Curtain(
         renderTitle: renderTitleInside,
         fillBackground: !renderFrame,
-        child: child);
+        child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: !renderFrame ? BoxFit.cover : BoxFit.fitHeight,
+                    image: const AssetImage("images/background.png"))),
+            child: IsPortfolioOpenProvider(child: child)));
 
     return renderFrame
         ? Container(
